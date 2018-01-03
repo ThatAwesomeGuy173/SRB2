@@ -178,6 +178,9 @@ static char returnWadPath[256];
 #include "../byteptr.h"
 #endif
 
+// Discord rich presence
+#include "discord-rpc.h"
+
 /**	\brief	The JoyReset function
 
 	\param	JoySet	Joystick info to reset
@@ -2132,6 +2135,10 @@ void I_Quit(void)
 		printf("\r");
 		ShowEndTxt();
 	}
+
+	// Discord rich presence
+	Discord_Shutdown();
+	
 death:
 	W_Shutdown();
 	exit(0);
@@ -2260,6 +2267,9 @@ void I_Error(const char *error, ...)
 #if defined (PARANOIA) && defined (__CYGWIN__)
 	*(INT32 *)2 = 4; //Alam: Debug!
 #endif
+
+	// Discord rich presence
+	Discord_Shutdown();
 
 	exit(-1);
 }
