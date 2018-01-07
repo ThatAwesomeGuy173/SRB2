@@ -3900,7 +3900,7 @@ DoneSection2:
 
 					HU_SetCEchoFlags(0);
 					HU_SetCEchoDuration(5);
-					HU_DoCEcho(va(M_GetText("%s\\captured the red flag.\\\\\\\\"), player_names[player-players]));
+					HU_DoCEcho(va(M_GetText("%s\\captured the orange flag.\\\\\\\\"), player_names[player-players]));
 
 					if (splitscreen || players[consoleplayer].ctfteam == 2)
 						S_StartSound(NULL, sfx_flgcap);

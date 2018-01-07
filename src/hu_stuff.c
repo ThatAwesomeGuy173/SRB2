@@ -567,7 +567,7 @@ static void Got_Saycmd(UINT8 **p, INT32 playernum)
 		{
 			cend = "\x80";
 			if (players[playernum].ctfteam == 1) // red
-				cstart = "\x85";
+				cstart = "\x87";
 			else if (players[playernum].ctfteam == 2) // blue
 				cstart = "\x84";
 		}

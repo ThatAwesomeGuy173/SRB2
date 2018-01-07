@@ -28,7 +28,7 @@
 #include "v_video.h" // video flags for CEchos
 
 // CTF player names
-#define CTFTEAMCODE(pl) pl->ctfteam ? (pl->ctfteam == 1 ? "\x85" : "\x84") : ""
+#define CTFTEAMCODE(pl) pl->ctfteam ? (pl->ctfteam == 1 ? "\x87" : "\x84") : ""
 #define CTFTEAMENDCODE(pl) pl->ctfteam ? "\x80" : ""
 
 void P_ForceFeed(const player_t *player, INT32 attack, INT32 fade, tic_t duration, INT32 period)
@@ -585,8 +585,8 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher, boolean heightcheck)
 
 				if (special->type == MT_REDFLAG)
 				{
-					flagtext = M_GetText("Red flag");
-					flagcolor = '\x85';
+					flagtext = M_GetText("Orange flag");
+					flagcolor = '\x87';
 				}
 				else
 				{
@@ -3638,8 +3638,8 @@ void P_PlayerFlagBurst(player_t *player, boolean toss)
 
 		if (type == MT_REDFLAG)
 		{
-			flagtext = M_GetText("Red flag");
-			flagcolor = '\x85';
+			flagtext = M_GetText("Orange flag");
+			flagcolor = '\x87';
 		}
 		else
 		{

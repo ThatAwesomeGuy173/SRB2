@@ -2362,7 +2362,7 @@ mapthing_t *G_FindCTFStart(INT32 playernum)
 		if (!numredctfstarts)
 		{
 			if (playernum == consoleplayer || (splitscreen && playernum == secondarydisplayplayer))
-				CONS_Alert(CONS_WARNING, M_GetText("No Red Team starts in this map!\n"));
+				CONS_Alert(CONS_WARNING, M_GetText("No Orange Team starts in this map!\n"));
 			return NULL;
 		}
 
@@ -2374,7 +2374,7 @@ mapthing_t *G_FindCTFStart(INT32 playernum)
 		}
 
 		if (playernum == consoleplayer || (splitscreen && playernum == secondarydisplayplayer))
-			CONS_Alert(CONS_WARNING, M_GetText("Could not spawn at any Red Team starts!\n"));
+			CONS_Alert(CONS_WARNING, M_GetText("Could not spawn at any Orange Team starts!\n"));
 		return NULL;
 	}
 	else if (!players[playernum].ctfteam || players[playernum].ctfteam == 2) //blue

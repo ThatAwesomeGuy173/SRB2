@@ -2568,14 +2568,14 @@ static void Got_Teamchange(UINT8 **cp, INT32 playernum)
 	if (NetPacket.packet.autobalance)
 	{
 		if (NetPacket.packet.newteam == 1)
-			CONS_Printf(M_GetText("%s was autobalanced to the %c%s%c.\n"), player_names[playernum], '\x85', M_GetText("Red Team"), '\x80');
+			CONS_Printf(M_GetText("%s was autobalanced to the %c%s%c.\n"), player_names[playernum], '\x87', M_GetText("Orange Team"), '\x80');
 		else if (NetPacket.packet.newteam == 2)
 			CONS_Printf(M_GetText("%s was autobalanced to the %c%s%c.\n"), player_names[playernum], '\x84', M_GetText("Blue Team"), '\x80');
 	}
 	else if (NetPacket.packet.scrambled)
 	{
 		if (NetPacket.packet.newteam == 1)
-			CONS_Printf(M_GetText("%s was scrambled to the %c%s%c.\n"), player_names[playernum], '\x85', M_GetText("Red Team"), '\x80');
+			CONS_Printf(M_GetText("%s was scrambled to the %c%s%c.\n"), player_names[playernum], '\x87', M_GetText("Orange Team"), '\x80');
 		else if (NetPacket.packet.newteam == 2)
 			CONS_Printf(M_GetText("%s was scrambled to the %c%s%c.\n"), player_names[playernum], '\x84', M_GetText("Blue Team"), '\x80');
 	}
@@ -2584,7 +2584,7 @@ static void Got_Teamchange(UINT8 **cp, INT32 playernum)
 		if (G_TagGametype())
 			CONS_Printf(M_GetText("%s is now IT!\n"), player_names[playernum]);
 		else
-			CONS_Printf(M_GetText("%s switched to the %c%s%c.\n"), player_names[playernum], '\x85', M_GetText("Red Team"), '\x80');
+			CONS_Printf(M_GetText("%s switched to the %c%s%c.\n"), player_names[playernum], '\x87', M_GetText("Orange Team"), '\x80');
 	}
 	else if (NetPacket.packet.newteam == 2)
 	{

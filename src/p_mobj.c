@@ -7266,7 +7266,7 @@ void P_MobjThinker(mobj_t *mobj)
 						if (mobj->type == MT_REDFLAG)
 						{
 							if (!(mobj->flags2 & MF2_JUSTATTACKED))
-								CONS_Printf(M_GetText("The %c%s%c has returned to base.\n"), 0x85, M_GetText("Red flag"), 0x80);
+								CONS_Printf(M_GetText("The %c%s%c has returned to base.\n"), 0x87, M_GetText("Orange flag"), 0x80);
 
 							// Assumedly in splitscreen players will be on opposing teams
 							if (players[consoleplayer].ctfteam == 1 || splitscreen)

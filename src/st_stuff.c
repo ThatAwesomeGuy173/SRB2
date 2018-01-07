@@ -1583,11 +1583,11 @@ static void ST_drawCTFHUD(void)
 	}
 }
 
-// Draws "Red Team", "Blue Team", or "Spectator" for team gametypes.
+// Draws "Orange Team", "Blue Team", or "Spectator" for team gametypes.
 static inline void ST_drawTeamName(void)
 {
 	if (stplyr->ctfteam == 1)
-		V_DrawString(256, (splitscreen) ? STRINGY(184) : STRINGY(192), V_HUDTRANSHALF, "RED TEAM");
+		V_DrawString(232, (splitscreen) ? STRINGY(184) : STRINGY(192), V_HUDTRANSHALF, "ORANGE TEAM");
 	else if (stplyr->ctfteam == 2)
 		V_DrawString(248, (splitscreen) ? STRINGY(184) : STRINGY(192), V_HUDTRANSHALF, "BLUE TEAM");
 	else
