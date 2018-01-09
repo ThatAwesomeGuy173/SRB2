@@ -858,6 +858,9 @@ static void IdentifyVersion(void)
 	D_AddFile(va(pandf,srb2waddir,"patch.dta"));
 #endif
 
+	// Add the orange patch
+	D_AddFile(va(pandf,srb2waddir,"orange.dta"));
+
 #if !defined (HAVE_SDL) || defined (HAVE_MIXER)
 	{
 #if defined (DC) && 0
@@ -1151,12 +1154,13 @@ void D_SRB2Main(void)
 #ifdef USE_PATCH_DTA
 	W_VerifyFileMD5(4, ASSET_HASH_PATCH_DTA); // patch.dta
 #endif
+	
 
 	// don't check music.dta because people like to modify it, and it doesn't matter if they do
 	// ...except it does if they slip maps in there, and that's what W_VerifyNMUSlumps is for.
 #endif //ifndef DEVELOP
 
-	mainwads = 4; // there are 4 wads not to unload
+	mainwads = 5; // there are 4 wads not to unload
 #ifdef USE_PATCH_DTA
 	++mainwads; // patch.dta adds one more
 #endif

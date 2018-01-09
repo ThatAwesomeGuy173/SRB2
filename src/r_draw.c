@@ -151,11 +151,11 @@ const char *Color_Names[MAXSKINCOLORS] =
 	"Pink",      // SKINCOLOR_PINK
 	"Lavender",  // SKINCOLOR_LAVENDER
 	"Purple",    // SKINCOLOR_PURPLE
-	"Orange",    // SKINCOLOR_ORANGE
+	"Red",       // SKINCOLOR_ORANGE
 	"Rosewood",  // SKINCOLOR_ROSEWOOD
 	"Beige",     // SKINCOLOR_BEIGE
 	"Brown",     // SKINCOLOR_BROWN
-	"Red",       // SKINCOLOR_RED
+	"Orange",    // SKINCOLOR_RED
 	"Dark_Red",  // SKINCOLOR_DARKRED
 	"Neon_Green",// SKINCOLOR_NEONGREEN
 	"Green",     // SKINCOLOR_GREEN
@@ -251,11 +251,11 @@ static void R_GenerateTranslationColormap(UINT8 *dest_colormap, INT32 skinnum, U
 		0x90, // SKINCOLOR_PINK
 		0xf8, // SKINCOLOR_LAVENDER
 		0xc0, // SKINCOLOR_PURPLE
-		0x52, // SKINCOLOR_ORANGE
+		0x7d, // SKINCOLOR_ORANGE
 		0x5c, // SKINCOLOR_ROSEWOOD
 		0x20, // SKINCOLOR_BEIGE
 		0x30, // SKINCOLOR_BROWN
-		0x7d, // SKINCOLOR_RED
+		0x52, // SKINCOLOR_RED
 		0x85, // SKINCOLOR_DARKRED
 		0xb8, // SKINCOLOR_NEONGREEN
 		0xa0, // SKINCOLOR_GREEN
