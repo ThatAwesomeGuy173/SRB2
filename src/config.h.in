@@ -38,7 +38,6 @@
 #ifdef USE_PATCH_DTA
 #define ASSET_HASH_PATCH_DTA  "dbbf8bc6121618ee3be2d5b14650429b"
 #endif
-#define ASSET_HASH_ORANGE_DTA "a180c358f114c379b1532b434f83f18e"
 
 #endif
 #endif

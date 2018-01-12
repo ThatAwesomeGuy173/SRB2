@@ -858,9 +858,6 @@ static void IdentifyVersion(void)
 	D_AddFile(va(pandf,srb2waddir,"patch.dta"));
 #endif
 
-	// Add the orange patch
-	D_AddFile(va(pandf,srb2waddir,"orange.dta"));
-
 #if !defined (HAVE_SDL) || defined (HAVE_MIXER)
 	{
 #if defined (DC) && 0
@@ -875,6 +872,16 @@ static void IdentifyVersion(void)
 		else if (ms == 0)
 			I_Error("File %s has been modified with non-music lumps",musicfile);
 	}
+
+	// Verify that all the lumps in orange.dta match the ones listed in W_VerifyMusLumps
+	const char *orangefile = "orange.dta";
+	const char *orangepath = va(pandf,srb2waddir,orangefile);
+	int ms = W_VerifyNMUSlumps(orangepath);
+	if (ms == 1)
+		D_AddFile(orangepath);
+	else if (ms == 0)
+		I_Error("File %s has been modified with non-texture lumps",orangefile);
+
 #endif
 }
 

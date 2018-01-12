@@ -1230,6 +1230,31 @@ int W_VerifyNMUSlumps(const char *filename)
 		{"PAL", 3},
 		{"CLM", 3},
 		{"TRANS", 5},
+
+		// Lazy hack to whitelist the orange.dta lumps to mark it as unimportant
+		{"RMATCICO", 8},
+		{"RFLAGICO", 8},
+		{"GOTRFLAG", 8},
+
+		{"CTFFLG", 6},
+		{"ERZRED", 6},
+		{"CASTLE6", 7},
+		{"CEFLAG", 6},
+		{"MMB", 3},
+		{"ROCK", 4},
+		{"RCZ", 3},
+		{"CAVE", 4},
+		{"ZIMWALL1", 8},
+
+		{"RRBX", 4},
+		{"RFLG", 4},
+		{"GFLG", 4},
+
+		{"MMFLRB5", 7},
+		{"JNGMUDF1", 8},
+		{"THZFLR", 6},
+		{"DEM1_1", 6},
+
 		{NULL, 0},
 	};
 	return W_VerifyFile(filename, NMUSlist, false);
