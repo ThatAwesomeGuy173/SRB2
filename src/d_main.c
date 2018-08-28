@@ -102,53 +102,55 @@ int	snprintf(char *str, size_t n, const char *fmt, ...);
 #endif
 
 // Discord rich presence
-#include "discord-rpc.h"
+#include "discord-rpc.h" // Discord_Initialize
 
 // App ID
-// ThatAwesomeGuy173: this app is managed by me, feel free to make and use your own app if you like
+// This application is managed by ThatAwesomeGuy173#7432, feel free to edit this field and use your own
 static const char* APPLICATION_ID = "386469217806843914";
 
-// Straight copy-paste from the C demo app, lul
-static void handleDiscordReady()
+// Straight copy-paste from the C demo app lol
+static void RPC_Ready()
 {
-    printf("\nDiscord: ready\n");
+    CONS_Printf("\nDiscord: ready\n");
 }
 
-static void handleDiscordDisconnected(int errcode, const char* message)
+static void RPC_Disconnected(int errcode, const char* message)
 {
-    printf("\nDiscord: disconnected (%d: %s)\n", errcode, message);
+    CONS_Printf("\nDiscord: disconnected (%d: %s)\n", errcode, message);
 }
 
-static void handleDiscordError(int errcode, const char* message)
+static void RPC_Error(int errcode, const char* message)
 {
-    printf("\nDiscord: error (%d: %s)\n", errcode, message);
+    CONS_Printf("\nDiscord: error (%d: %s)\n", errcode, message);
 }
 
-// Function to set the Main Menu presence
-static void RPC_MainMenuPresence()
-{
-	DiscordRichPresence discordPresence;
-    memset(&discordPresence, 0, sizeof(discordPresence));
-    discordPresence.state = "SRB2RPC Beta v1.0";
-    discordPresence.details = "Main Menu";
-    discordPresence.largeImageKey = "main_menu";
-    discordPresence.instance = 0;
-	Discord_UpdatePresence(&discordPresence);
-}
-
-// Establish connection to Discord
-// This is only needed once
+// Establish a one-time connection to Discord
 static void RPC_DiscordInit()
 {
-	DiscordEventHandlers handlers;
-	memset(&handlers, 0, sizeof(handlers));
+	DiscordEventHandlers hdl;
+	memset(&hdl, 0, sizeof(hdl));
 	
 	// we only need these anyway, joining and spectating require approval
-	handlers.ready = handleDiscordReady;
-	handlers.disconnected = handleDiscordDisconnected;
-	handlers.errored = handleDiscordError;
+	hdl.ready = RPC_Ready;
+	hdl.disconnected = RPC_Disconnected;
+	hdl.errored = RPC_Error;
 	
-	Discord_Initialize(APPLICATION_ID, &handlers, 1, NULL);
+	Discord_Initialize(APPLICATION_ID, &hdl, 1, NULL);
+}
+
+// Function to set the status while in the menus
+// presence_status is set to 1 when entering the Join Game (Search) menu
+void RPC_MainMenuPresence(int presence_status)
+{
+	DiscordRichPresence dp;
+    memset(&dp, 0, sizeof(dp));
+	if (presence_status == 1)
+		dp.details = "Looking for a netgame";
+	else
+		dp.details = "Idle";
+    dp.largeImageKey = "title";
+    dp.instance = 0;
+	Discord_UpdatePresence(&dp);
 }
 
 // platform independant focus loss
@@ -619,6 +621,9 @@ void D_SRB2Loop(void)
 	// hack to start on a nice clear console screen.
 	COM_ImmedExecute("cls;version");
 
+	// Set idle Discord presence as soon as the game is done booting up
+	RPC_MainMenuPresence(0);
+
 	if (rendermode == render_soft)
 		V_DrawScaledPatch(0, 0, 0, (patch_t *)W_CacheLumpNum(W_GetNumForName("CONSBACK"), PU_CACHE));
 	I_FinishUpdate(); // page flip or blit buffer
@@ -787,9 +792,9 @@ void D_StartTitle(void)
 #endif
 	if (rendermode != render_none)
 		V_SetPaletteLump("PLAYPAL");
-	
-	// Set main menu presence every time the menu's created
-	RPC_MainMenuPresence();
+
+	// Set idle Discord presence every time the menu's created
+	RPC_MainMenuPresence(0);
 }
 
 //

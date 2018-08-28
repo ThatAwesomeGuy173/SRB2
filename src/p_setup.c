@@ -76,6 +76,8 @@
 #include "p_slopes.h"
 #endif
 
+#include "discord-rpc.h" // DiscordRichPresence
+
 //
 // Map MD5, calculated on level load.
 // Sent to clients in PT_SERVERINFO.
@@ -3152,3 +3154,48 @@ boolean P_DelWadFile(void)
 	return false;
 }
 #endif
+
+// Discord rich presence
+// Grab the name of a skin
+void P_UpdateSkin(const char *skinname)
+{
+	INT32 i;
+	for (i = 0; i < numskins; i++)
+	{
+		// search in the skin list
+		if (stricmp(skins[i].name, skinname) == 0)
+		{
+			strcpy(currentskin, skinname);
+			return;
+		}
+	}
+}
+
+void P_SetDiscordStatus(void)
+{
+    char mapname[8];
+    char mapkey[8];
+    strcpy(mapname, G_BuildMapName(gamemap));
+    strcpy(mapkey, G_BuildMapName(gamemap));
+
+	// Gametype
+    DiscordRichPresence dp;
+    memset(&dp, 0, sizeof(dp));
+    dp.state = G_BuildMapTitle(gamemap);
+    dp.details = (multiplayer || netgame) ? va("Playing %s", gametype_cons_t[gametype].strvalue) : va("Playing Single Player");
+
+	// Map
+    dp.largeImageKey = strlwr(mapkey); // Map image
+	dp.largeImageText = mapname; // Map tooltip
+
+	// Character
+	dp.smallImageKey = currentskin;
+	//dp.smallImageText = "Sonic";
+
+    if (!((stricmp(currentskin,"sonic")==0) || (stricmp(currentskin,"tails")==0) || (stricmp(currentskin,"knuckles")==0))) {
+		dp.smallImageKey = "unknown_s";
+		dp.smallImageText = "Unknown";
+	}
+
+    Discord_UpdatePresence(&dp);
+}

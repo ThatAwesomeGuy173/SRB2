@@ -1159,6 +1159,11 @@ static void SendNameAndColor(void)
 			SetPlayerSkin(consoleplayer, cv_skin.string);
 		}
 
+		// Discord rich presence
+		// Useful for when you end up changing skins in the middle of SP games!
+		P_UpdateSkin(cv_skin.string);
+		P_SetDiscordStatus();
+
 		return;
 	}
 
@@ -1188,6 +1193,11 @@ static void SendNameAndColor(void)
 	WRITEUINT8(p, (UINT8)cv_playercolor.value);
 	WRITEUINT8(p, (UINT8)cv_skin.value);
 	SendNetXCmd(XD_NAMEANDCOLOR, buf, p - buf);
+
+	// Discord rich presence
+	// Updates skin for netgames
+	P_UpdateSkin(cv_skin.string);
+	P_SetDiscordStatus();
 }
 
 // splitscreen
@@ -1840,20 +1850,9 @@ static void Got_Mapcmd(UINT8 **cp, INT32 playernum)
 	if (demorecording) // Okay, level loaded, character spawned and skinned,
 		G_BeginRecording(); // I AM NOW READY TO RECORD.
 	demo_start = true;
-	
-	// Set the Rich Presence status every map change
-	// Start the timer
-	static int64_t StartTime;
-	StartTime = time(0);
-	
-	DiscordRichPresence discordPresence;
-	memset(&discordPresence, 0, sizeof(discordPresence));
-	discordPresence.state = G_BuildMapTitle(gamemap);
-	discordPresence.details = "FILLER DETAILS"; // THIS SHOULD BE THE GAMETYPE!!!!
-	discordPresence.largeImageKey = "map01"; // THIS SHOULD BE G_BuildMapName(gamemap) CONVERTED TO LOWERCASE!!!!
-	discordPresence.smallImageKey = "skin_sonic"; // I DON'T KNOW HOW TO DO THIS ONE BUT UPDATES SHOULD BE IN r_things.c:2411 I THINK!!!!
-	discordPresence.startTimestamp = StartTime;
-	Discord_UpdatePresence(&discordPresence);
+
+	// Discord rich presence
+	P_SetDiscordStatus();
 }
 
 static void Command_Pause(void)
@@ -3277,7 +3276,7 @@ static void Command_Version_f(void)
 #ifdef DEVELOP
 	CONS_Printf("Sonic Robo Blast 2 %s-%s (%s %s)\n", compbranch, comprevision, compdate, comptime);
 #else
-	CONS_Printf("Sonic Robo Blast 2 %s (%s %s %s)\n", VERSIONSTRING, compdate, comptime, comprevision);
+	CONS_Printf("Sonic Robo Blast 2 RPC %s (%s %s %s)\n", VERSIONSTRING, compdate, comptime, comprevision);
 #endif
 }
 

@@ -58,3 +58,6 @@ void D_AdvanceDemo(void);
 void D_StartTitle(void);
 
 #endif //__D_MAIN__
+
+// Discord rich presence
+void RPC_MainMenuPresence(int presence_status);

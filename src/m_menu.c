@@ -2400,6 +2400,9 @@ boolean M_Responder(event_t *ev)
 					MSCloseUDPSocket();		// Clean up so we can re-open the connection later.
 					netgame = false;
 					multiplayer = false;
+
+					// Discord rich presence
+					RPC_MainMenuPresence(0);
 				}
 
 				if (currentMenu == &SP_TimeAttackDef || currentMenu == &SP_NightsAttackDef)
@@ -5846,10 +5849,10 @@ static void M_HandleServerPage(INT32 choice)
 	{
 		if (currentMenu->prevMenu)
 			M_SetupNextMenu(currentMenu->prevMenu);
-		else
+		else 
 			M_ClearMenus(true);
+		}
 	}
-}
 
 static void M_Connect(INT32 choice)
 {
@@ -5967,6 +5970,9 @@ static void M_DrawConnectMenu(void)
 	localservercount = serverlistcount;
 
 	M_DrawGenericMenu();
+
+	// Discord rich presence
+	RPC_MainMenuPresence(1);
 }
 
 static boolean M_CancelConnect(void)

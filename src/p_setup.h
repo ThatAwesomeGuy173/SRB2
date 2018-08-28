@@ -17,6 +17,7 @@
 #include "doomdata.h"
 #include "doomstat.h"
 #include "r_defs.h"
+#include "m_menu.h" // gametype_cons_t
 
 // map md5, sent to players via PT_SERVERINFO
 extern unsigned char mapmd5[16];
@@ -75,5 +76,11 @@ void P_AddGradesForMare(INT16 i, UINT8 mare, char *gtext);
 UINT8 P_GetGrade(UINT32 pscore, INT16 map, UINT8 mare);
 UINT8 P_HasGrades(INT16 map, UINT8 mare);
 UINT32 P_GetScoreForGrade(INT16 map, UINT8 mare, UINT8 grade);
+
+// Discord rich presence
+void P_UpdateSkin(const char *skinname);
+char currentskin[10];
+
+void P_SetDiscordStatus(void);
 
 #endif

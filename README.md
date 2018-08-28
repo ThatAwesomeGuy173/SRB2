@@ -1,23 +1,19 @@
-# Sonic Robo Blast 2
+# Sonic Robo Blast 2 with Discord rich presence support
+Experimental branch. Huge thanks to Prisima and SteelTitanium for helping out with this project!
 
-[![Build status](https://ci.appveyor.com/api/projects/status/399d4hcw9yy7hg2y?svg=true)](https://ci.appveyor.com/project/STJr/srb2)
-[![Build status](https://travis-ci.org/STJr/SRB2.svg?branch=master)](https://travis-ci.org/STJr/SRB2)
-[![CircleCI](https://circleci.com/gh/STJr/SRB2/tree/master.svg?style=svg)](https://circleci.com/gh/STJr/SRB2/tree/master)
+_Support for other platforms (macOS, Linux) is currently untested. Use at your own risk._
 
-[Sonic Robo Blast 2](https://srb2.org/) is a 3D Sonic the Hedgehog fangame based on a modified version of [Doom Legacy](http://doomlegacy.sourceforge.net/).
-
-## Dependencies
-- NASM (x86 builds only)
-- SDL2 (Linux/OS X only)
-- SDL2-Mixer (Linux/OS X only)
-- libupnp (Linux/OS X only)
-- libgme (Linux/OS X only)
-
-Warning: 64-bit builds are not netgame compatible with 32-bit builds. Use at your own risk.
+## Demo
+[View a quick feature demonstration here.](https://serval.is-very-cute.moe/ZXupoAAK.webm)
 
 ## Compiling
+Use the flag `DISCORD-RPC=1` when compiling, so for instance to build a Windows SDL2 exe you should use: 
+```
+mingw32-make MINGW=1 CC=gcc WINDOWSHELL=1 SDL=1 NOOBJDUMP=1 DISCORD-RPC=1
+```
 
-See [SRB2 Wiki/Source code compiling](http://wiki.srb2.org/wiki/Source_code_compiling)
+You will also need **discord-rpc.dll**, which can be found [here](https://github.com/discordapp/discord-rpc/releases). 
+Download and open discord-rpc-win.zip, then navigate to `discord-rpc\win32-dynamic\bin` and copy discord-rpc.dll to your SRB2 folder.
 
 ## Disclaimer
 Sonic Team Junior is in no way affiliated with SEGA or Sonic Team. We do not claim ownership of any of SEGA's intellectual property used in SRB2.
